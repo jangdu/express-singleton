@@ -1,0 +1,18 @@
+version: '3'
+services:
+  app:
+    build: .
+    ports:
+      - '3000:3000'
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=postgres://postgres:postgres@db:5432/postgres
+  db:
+    image: postgres:13
+    ports:
+      - '5432:5432' # 호스트의 5432 포트를 컨테이너의 5432 포트에 매핑
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
